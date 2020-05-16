@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  build_and_deploy:
     name: Build
     runs-on: ubuntu-latest
     strategy:
@@ -25,20 +25,9 @@ jobs:
         npm install
         npm run build
         npm run lint
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [10.x]
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: GitHub Action for Firebase
-        uses: w9jds/firebase-action@v1.3.0
-        with:
-          args: deploy --only functions
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+    - name: GitHub Action for Firebase
+      uses: w9jds/firebase-action@v1.3.0
+      with:
+        args: deploy --only functions
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
