@@ -21,9 +21,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install Dependencies and Build
       run: |
-      cd ./functions
-      npm install
-      npm run build
+        cd ./functions
+        npm install
+        npm run build
 
   deploy:
     name: Deploy
