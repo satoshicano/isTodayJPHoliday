@@ -24,7 +24,7 @@ jobs:
   deploy:
     name: Deploy
     needs: build
-    runds-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
