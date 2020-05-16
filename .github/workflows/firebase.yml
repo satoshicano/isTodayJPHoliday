@@ -9,23 +9,29 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
     steps:
     - name: Checkout Repo
       uses: actions/checkout@master
-    - name: List Directory
-      run: ls;pwd
-    - name: Change Directory
-      run: cd functions/
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Build
-      run: npm run build
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@master
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies and Build
+      run: |
+      cd ./functions
+      npm install
+      npm run build
 
   deploy:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
