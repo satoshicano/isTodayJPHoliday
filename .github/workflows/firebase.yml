@@ -12,9 +12,10 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@master
-    
+    - name: List Directory
+      uses: ls;pwd
     - name: Change Directory
-      run: cd functions
+      run: cd functions/
     - name: Install Dependencies
       run: npm install
 
@@ -31,6 +32,6 @@ jobs:
       - name: GitHub Action for Firebase
         uses: w9jds/firebase-action@v1.3.0
         with:
-          args: deploy --only hosting
+          args: deploy --only functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
