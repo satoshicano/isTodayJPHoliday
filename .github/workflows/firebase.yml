@@ -13,7 +13,7 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@master
     - name: List Directory
-      uses: ls;pwd
+      run: ls;pwd
     - name: Change Directory
       run: cd functions/
     - name: Install Dependencies
